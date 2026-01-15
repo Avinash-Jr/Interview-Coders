@@ -7,6 +7,7 @@ import { serve } from "inngest/express";
 // import { protectRoute } from "./middleware/protectRoute.js"; // we are not using protectRoute middleware here currently
 import { clerkMiddleware } from "@clerk/express";
 import chatRoutes from "./routes/chatRoutes.js";
+import sessionRoutes from "./routes/sessionRoute.js";
 
 import { ENV } from "./lib/env.js";
 import { connectDB } from "./lib/db.js";
@@ -26,6 +27,7 @@ app.use(clerkMiddleware()); // this adds Clerk authentication middleware to the 
 // Inngest setup
 app.use("/api/inngest", serve({ client: inngest, functions }));
 app.use("/api/chat", chatRoutes);
+app.use("/api/sessions", sessionRoutes); // Using chatRoutes for session-related endpoints as well
 
 app.get("/health", (req, res) => {
   res.auth;
