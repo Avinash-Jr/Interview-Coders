@@ -4,8 +4,9 @@ import path from "path";
 import cors from "cors";
 // import serve from "inngest/express";
 import { serve } from "inngest/express";
-
-
+// import { protectRoute } from "./middleware/protectRoute.js"; // we are not using protectRoute middleware here currently
+import { clerkMiddleware } from "@clerk/express";
+import chatRoutes from "./routes/chatRoutes.js";
 
 import { ENV } from "./lib/env.js";
 import { connectDB } from "./lib/db.js";
@@ -15,22 +16,29 @@ const app = express();
 
 const __dirname = path.resolve();
 
-// middleware 
-app.use(express.json())
-// credentials: true ---> meaning server allows a browser to send cookies on requests to the server
-// origin : true ---> meaning server allows requests from the specified origin
-app.use(cors({origin:ENV.CLIENT_URL, credentials:true}))
+// middleware
+app.use(express.json());
 
-app.use("/api/inngest", serve({client: inngest, functions}));
+app.use(cors({ origin: ENV.CLIENT_URL, credentials: true })); // credentials: true ---> meaning server allows a browser to send cookies on requests to the server
+// origin : true ---> meaning server allows requests from the specified client URL
+
+app.use(clerkMiddleware()); // this adds Clerk authentication middleware to the Express app req.auth object.
+// Inngest setup
+app.use("/api/inngest", serve({ client: inngest, functions }));
+app.use("/api/chat", chatRoutes);
 
 app.get("/health", (req, res) => {
+  res.auth;
   res.status(200).json({ msg: "Success from the API from the backend part" });
 });
-app.get("/books", (req, res) => {
-  res.status(200).json({ msg: "This is the books API from the backend part" });
-});
 
+// app.get("/books", (req, res) => {
+//   res.status(200).json({ msg: "This is the books API from the backend part" });
+// });
 
+// app.get("/video-calls", protectRoute, ((req, res) => {
+//   res.status(200).json({ msg: "This is the video calls API from the backend part" });
+// }));
 
 //  Make our APP ready for Deployment
 if (ENV.NODE_ENV === "production") {
@@ -43,14 +51,15 @@ if (ENV.NODE_ENV === "production") {
 
 // app.listen(3000, ()=> console.log("Server is running on the port 3000", ENV.PORT));
 
-    const startServer = async () => {
-        try { 
-        await connectDB();
-        app.listen(ENV.PORT, () => console.log("Server is running on the port: ", ENV.PORT));
-        } catch (error) {
-            console.error("Failed to start server:", error);
-            process.exit(1);
-        }
-    };
-    startServer();
-
+const startServer = async () => {
+  try {
+    await connectDB();
+    app.listen(ENV.PORT, () =>
+      console.log("Server is running on the port: ", ENV.PORT)
+    );
+  } catch (error) {
+    console.error("Failed to start server:", error);
+    process.exit(1);
+  }
+};
+startServer();
