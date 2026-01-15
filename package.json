@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Avinash-Jr/Interview-Coders/issues"
   },
-  "homepage": "https://github.com/Avinash-Jr/Interview-Coders#readme"
+  "homepage": "https://github.com/Avinash-Jr/Interview-Coders#readme",
+  "dependencies": {
+    "mongodb": "^7.0.0"
+  }
 }
