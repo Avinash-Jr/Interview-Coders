@@ -89,10 +89,17 @@ export async function joinSession(req, res) {
         if (!session) {
             return res.status(404).json({ message: "Session not found" });
         }   
+        if (session.status !== "active") {
+            return res.status(400).json({ message: "Cannot join a session that is not active" });
+        }
+        if (session.hostId.toString() === userId) {
+            return res.status(400).json({ message: "Host cannot join their own session as participant" });
+        }
+
         // session.participants.push(userId);
         // check if user is already a participant
         if (session.participants.includes(userId)) {
-            return res.status(400).json({ message: "User already joined the session" });
+            return res.status(409).json({ message: "User already joined the session" });
         }
         // Add user to participants if not already present
         session.participants.push(userId);
@@ -121,16 +128,18 @@ export async function endSession(req, res) {
         if (session.status === "completed") {
             return res.status(400).json({ message: "Session is already ended" });
         }
-        session.status = "completed";
-        await session.save();
-
+        
         // detele stream video call using clerk API
         await streamClient.videocall.delete("default", session.callId);
         await call.delete({hard: true});
-
+        
         // delete stream chat channel
         const channel = chatClient.channel("messaging", session.callId);
         await channel.delete();
+        
+        session.status = "completed";
+        await session.save();
+        
         res.status(200).json({ message: "Session ended successfully", session });
     } catch (error) {
         console.error("Error ending session:", error.message);
