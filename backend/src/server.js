@@ -4,7 +4,9 @@ import path from "path";
 import cors from "cors";
 // import serve from "inngest/express";
 import { serve } from "inngest/express";
-
+// import { protectRoute } from "./middleware/protectRoute.js"; // we are not using protectRoute middleware here currently 
+import { clerkMiddleware } from '@clerk/express';
+import chatRoutes from "./routes/chatRoutes.js";
 
 
 import { ENV } from "./lib/env.js";
@@ -17,20 +19,28 @@ const __dirname = path.resolve();
 
 // middleware 
 app.use(express.json())
-// credentials: true ---> meaning server allows a browser to send cookies on requests to the server
-// origin : true ---> meaning server allows requests from the specified origin
-app.use(cors({origin:ENV.CLIENT_URL, credentials:true}))
 
+app.use(cors({origin:ENV.CLIENT_URL, credentials:true}))   // credentials: true ---> meaning server allows a browser to send cookies on requests to the server
+// origin : true ---> meaning server allows requests from the specified client URL
+
+app.use(clerkMiddleware());  // this adds Clerk authentication middleware to the Express app re.auth() method.
+
+// Inngest setup
 app.use("/api/inngest", serve({client: inngest, functions}));
+app.use("/api/chat", chatRoutes);
 
 app.get("/health", (req, res) => {
+  res.auth;
   res.status(200).json({ msg: "Success from the API from the backend part" });
 });
-app.get("/books", (req, res) => {
-  res.status(200).json({ msg: "This is the books API from the backend part" });
-});
 
+// app.get("/books", (req, res) => {
+//   res.status(200).json({ msg: "This is the books API from the backend part" });
+// });
 
+// app.get("/video-calls", protectRoute, ((req, res) => {
+//   res.status(200).json({ msg: "This is the video calls API from the backend part" });
+// }));
 
 //  Make our APP ready for Deployment
 if (ENV.NODE_ENV === "production") {
