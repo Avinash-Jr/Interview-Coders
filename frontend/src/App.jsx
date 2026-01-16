@@ -1,30 +1,29 @@
-import "./App.css";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignOutButton,
-} from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
+import HomePage from "./pages/HomePage.jsx";
+import ProblemsPage from "./pages/ProblemsPage.jsx";
+// import DashboardPage from "./pages/DashboardPage.jsx";
+// import ProfilePage from "./pages/ProfilePage.jsx";
 
 function App() {
+  const { isSignedIn } = useUser();
+
   return (
     <>
-      <h1>Welcome to Interview Coders!</h1>
-      <p>
-        This is a full-stack application using React, Vite, Express, and
-        MongoDB.
-      </p>
-      <p>Explore the features and enjoy coding!</p>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
 
-      <SignedOut>
-        <SignInButton mode="modal">
-          <button className="login-button">Login</button>
-        </SignInButton>
-      </SignedOut>
+        <Route
+          path="/problems"
+          element={
+            isSignedIn ? <ProblemsPage /> : <Navigate to="/" replace />
+          }
+        />
+      </Routes>
 
-      <SignedIn>
-        <SignOutButton />
-      </SignedIn>
+      <Toaster toastOptions={{ duration: 3000 }} />
     </>
   );
 }
