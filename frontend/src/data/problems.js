@@ -4,26 +4,362 @@ export const PROBLEMS = {
     title: "Two Sum",
     difficulty: "Easy",
     category: "Array • Hash Table",
-    tags: ["array", "hash-table", "brute-force", "optimization"],
-    companyFrequency: [
-      { company: "Amazon", frequency: "Very High" },
-      { company: "Google", frequency: "High" },
-      { company: "Microsoft", frequency: "Very High" },
-      { company: "Meta", frequency: "High" },
-      { company: "Accenture", frequency: "Very High" },
-    ],
     description: {
-      text: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
+      text: "Given an array of integers nums and an integer target, return indices of the two numbers in the array such that they add up to target.",
       notes: [
-        "Exactly one solution exists.",
-        "You may not use the same element twice.",
+        "You may assume that each input would have exactly one solution, and you may not use the same element twice.",
+        "You can return the answer in any order.",
       ],
     },
     examples: [
-      { input: "[2,7,11,15], target=9", output: "[0,1]" },
-      { input: "[3,2,4], target=6", output: "[1,2]" },
-      { input: "[3,3], target=6", output: "[0,1]" },
+      {
+        input: "nums = [2,7,11,15], target = 9",
+        output: "[0,1]",
+        explanation: "Because nums[0] + nums[1] == 9, we return [0, 1].",
+      },
+      {
+        input: "nums = [3,2,4], target = 6",
+        output: "[1,2]",
+      },
+      {
+        input: "nums = [3,3], target = 6",
+        output: "[0,1]",
+      },
     ],
+    constraints: [
+      "2 ≤ nums.length ≤ 10⁴",
+      "-10⁹ ≤ nums[i] ≤ 10⁹",
+      "-10⁹ ≤ target ≤ 10⁹",
+      "Only one valid answer exists",
+    ],
+    starterCode: {
+      javascript: `function twoSum(nums, target) {
+  // Write your solution here
+  
+}
+
+// Test cases
+console.log(twoSum([2, 7, 11, 15], 9)); // Expected: [0, 1]
+console.log(twoSum([3, 2, 4], 6)); // Expected: [1, 2]
+console.log(twoSum([3, 3], 6)); // Expected: [0, 1]`,
+      python: `def twoSum(nums, target):
+    # Write your solution here
+    pass
+
+# Test cases
+print(twoSum([2, 7, 11, 15], 9))  # Expected: [0, 1]
+print(twoSum([3, 2, 4], 6))  # Expected: [1, 2]
+print(twoSum([3, 3], 6))  # Expected: [0, 1]`,
+      java: `import java.util.*;
+
+class Solution {
+    public static int[] twoSum(int[] nums, int target) {
+        // Write your solution here
+        
+        return new int[0];
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(twoSum(new int[]{2, 7, 11, 15}, 9))); // Expected: [0, 1]
+        System.out.println(Arrays.toString(twoSum(new int[]{3, 2, 4}, 6))); // Expected: [1, 2]
+        System.out.println(Arrays.toString(twoSum(new int[]{3, 3}, 6))); // Expected: [0, 1]
+    }
+}`,
+    },
+    expectedOutput: {
+      javascript: "[0,1]\n[1,2]\n[0,1]",
+      python: "[0, 1]\n[1, 2]\n[0, 1]",
+      java: "[0, 1]\n[1, 2]\n[0, 1]",
+    },
+  },
+    "merge-two-sorted-lists": {
+    id: "merge-two-sorted-lists",
+    title: "Merge Two Sorted Lists",
+    difficulty: "Easy",
+    category: "Linked List • Two Pointers",
+    description: {
+      text: "Merge two sorted linked lists and return it as a sorted list.",
+      notes: [],
+    },
+    examples: [
+      {
+        input: "l1 = [1,2,4], l2 = [1,3,4]",
+        output: "[1,1,2,3,4,4]",
+      },
+    ],
+    constraints: ["The number of nodes in both lists is in the range [0, 50]"],
+    starterCode: {
+      javascript: `function mergeTwoLists(l1, l2) {
+  // Write your solution here
+}`,
+      python: `def mergeTwoLists(l1, l2):
+    pass`,
+      java: `class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        return null;
+    }
+}`,
+    },
+    expectedOutput: {
+      javascript: "[1,1,2,3,4,4]",
+      python: "[1, 1, 2, 3, 4, 4]",
+      java: "[1, 1, 2, 3, 4, 4]",
+    },
+  },
+
+  "best-time-buy-sell-stock": {
+    id: "best-time-buy-sell-stock",
+    title: "Best Time to Buy and Sell Stock",
+    difficulty: "Easy",
+    category: "Array • Greedy",
+    description: {
+      text: "Find the maximum profit you can achieve from buying and selling one stock.",
+      notes: [],
+    },
+    examples: [
+      { input: "prices = [7,1,5,3,6,4]", output: "5" },
+    ],
+    constraints: ["1 ≤ prices.length ≤ 10⁵"],
+    starterCode: {
+      javascript: `function maxProfit(prices) {
+  // Write your solution here
+}`,
+      python: `def maxProfit(prices):
+    pass`,
+      java: `class Solution {
+    public static int maxProfit(int[] prices) {
+        return 0;
+    }
+}`,
+    },
+    expectedOutput: {
+      javascript: "5",
+      python: "5",
+      java: "5",
+    },
+  },
+
+  "contains-duplicate": {
+    id: "contains-duplicate",
+    title: "Contains Duplicate",
+    difficulty: "Easy",
+    category: "Array • Hash Set",
+    description: {
+      text: "Return true if any value appears at least twice in the array.",
+      notes: [],
+    },
+    examples: [
+      { input: "nums = [1,2,3,1]", output: "true" },
+    ],
+    constraints: ["1 ≤ nums.length ≤ 10⁵"],
+    starterCode: {
+      javascript: `function containsDuplicate(nums) {
+  // Write your solution here
+}`,
+      python: `def containsDuplicate(nums):
+    pass`,
+      java: `class Solution {
+    public static boolean containsDuplicate(int[] nums) {
+        return false;
+    }
+}`,
+    },
+    expectedOutput: {
+      javascript: "true",
+      python: "True",
+      java: "true",
+    },
+  },
+
+  "move-zeroes": {
+    id: "move-zeroes",
+    title: "Move Zeroes",
+    difficulty: "Easy",
+    category: "Array • Two Pointers",
+    description: {
+      text: "Move all zeroes to the end while maintaining the order of non-zero elements.",
+      notes: [],
+    },
+    examples: [
+      { input: "nums = [0,1,0,3,12]", output: "[1,3,12,0,0]" },
+    ],
+    constraints: [],
+    starterCode: {
+      javascript: `function moveZeroes(nums) {
+  // Write your solution here
+}`,
+      python: `def moveZeroes(nums):
+    pass`,
+      java: `class Solution {
+    public static void moveZeroes(int[] nums) {
+    }
+}`,
+    },
+    expectedOutput: {
+      javascript: "[1,3,12,0,0]",
+      python: "[1, 3, 12, 0, 0]",
+      java: "[1, 3, 12, 0, 0]",
+    },
+  },
+
+  "climbing-stairs": {
+    id: "climbing-stairs",
+    title: "Climbing Stairs",
+    difficulty: "Easy",
+    category: "Dynamic Programming",
+    description: {
+      text: "You are climbing a staircase. Each time you can climb 1 or 2 steps.",
+      notes: [],
+    },
+    examples: [
+      { input: "n = 3", output: "3" },
+    ],
+    constraints: ["1 ≤ n ≤ 45"],
+    starterCode: {
+      javascript: `function climbStairs(n) {
+  // Write your solution here
+}`,
+      python: `def climbStairs(n):
+    pass`,
+      java: `class Solution {
+    public static int climbStairs(int n) {
+        return 0;
+    }
+}`,
+    },
+    expectedOutput: {
+      javascript: "3",
+      python: "3",
+      java: "3",
+    },
+  },
+
+  "single-number": {
+    id: "single-number",
+    title: "Single Number",
+    difficulty: "Easy",
+    category: "Bit Manipulation",
+    description: {
+      text: "Every element appears twice except for one. Find that single one.",
+      notes: [],
+    },
+    examples: [
+      { input: "nums = [4,1,2,1,2]", output: "4" },
+    ],
+    constraints: [],
+    starterCode: {
+      javascript: `function singleNumber(nums) {
+  // Write your solution here
+}`,
+      python: `def singleNumber(nums):
+    pass`,
+      java: `class Solution {
+    public static int singleNumber(int[] nums) {
+        return 0;
+    }
+}`,
+    },
+    expectedOutput: {
+      javascript: "4",
+      python: "4",
+      java: "4",
+    },
+  },
+
+  "intersection-of-two-arrays": {
+    id: "intersection-of-two-arrays",
+    title: "Intersection of Two Arrays",
+    difficulty: "Easy",
+    category: "Array • Hash Set",
+    description: {
+      text: "Return the intersection of two arrays.",
+      notes: [],
+    },
+    examples: [
+      { input: "nums1 = [1,2,2,1], nums2 = [2,2]", output: "[2]" },
+    ],
+    constraints: [],
+    starterCode: {
+      javascript: `function intersection(nums1, nums2) {
+  // Write your solution here
+}`,
+      python: `def intersection(nums1, nums2):
+    pass`,
+      java: `class Solution {
+    public static int[] intersection(int[] nums1, int[] nums2) {
+        return new int[0];
+    }
+}`,
+    },
+    expectedOutput: {
+      javascript: "[2]",
+      python: "[2]",
+      java: "[2]",
+    },
+  },
+
+  "majority-element": {
+    id: "majority-element",
+    title: "Majority Element",
+    difficulty: "Easy",
+    category: "Array • Voting Algorithm",
+    description: {
+      text: "Find the element that appears more than ⌊n / 2⌋ times.",
+      notes: [],
+    },
+    examples: [
+      { input: "nums = [3,2,3]", output: "3" },
+    ],
+    constraints: [],
+    starterCode: {
+      javascript: `function majorityElement(nums) {
+  // Write your solution here
+}`,
+      python: `def majorityElement(nums):
+    pass`,
+      java: `class Solution {
+    public static int majorityElement(int[] nums) {
+        return 0;
+    }
+}`,
+    },
+    expectedOutput: {
+      javascript: "3",
+      python: "3",
+      java: "3",
+    },
+  },
+
+  "remove-duplicates-from-sorted-array": {
+    id: "remove-duplicates-from-sorted-array",
+    title: "Remove Duplicates from Sorted Array",
+    difficulty: "Easy",
+    category: "Array • Two Pointers",
+    description: {
+      text: "Remove duplicates in-place such that each element appears only once.",
+      notes: [],
+    },
+    examples: [
+      { input: "nums = [1,1,2]", output: "2" },
+    ],
+    constraints: [],
+    starterCode: {
+      javascript: `function removeDuplicates(nums) {
+  // Write your solution here
+}`,
+      python: `def removeDuplicates(nums):
+    pass`,
+      java: `class Solution {
+    public static int removeDuplicates(int[] nums) {
+        return 0;
+    }
+}`,
+    },
+    expectedOutput: {
+      javascript: "2",
+      python: "2",
+      java: "2",
+    },
   },
 
   "reverse-string": {
@@ -203,7 +539,6 @@ export const PROBLEMS = {
   ],
 },
 
-
   "maximum-depth-of-binary-tree": {
     id: "maximum-depth-of-binary-tree",
     title: "Maximum Depth of Binary Tree",
@@ -243,44 +578,44 @@ export const PROBLEMS = {
     { input: "3", output: "2" },
   ],
 },
-  "climbing-stairs": {
-    id: "climbing-stairs",
-    title: "Climbing Stairs",
-    difficulty: "Easy",
-    category: "Dynamic Programming",
-    tags: ["dynamic-programming", "math"],
-    companyFrequency: [
-        { company: "Microsoft", frequency: "High" },
-        { company: "Amazon", frequency: "Medium" },
-        { company: "Google", frequency: "Low" },
-    ],
-    description: {
-      text: "Count distinct ways to climb to the top of n stairs.",
-    },
-    examples: [
-      { input: "2", output: "2" },
-        { input: "3", output: "3" },
-    ],
-  },
-  "merge-two-sorted-lists": {
-    id: "merge-two-sorted-lists",
-    title: "Merge Two Sorted Lists",
-    difficulty: "Easy",
-    category: "Linked List • Recursion",
-    tags: ["linked-list", "recursion", "merge"],
-    companyFrequency: [
-        { company: "Meta", frequency: "High" },
-        { company: "Amazon", frequency: "Medium" },
-        { company: "Microsoft", frequency: "Low" },
-    ],
-    description: {
-      text: "Merge two sorted linked lists and return it as a new sorted list.",
-    },
-    examples: [
-      { input: "[1,2,4], [1,3,4]", output: "[1,1,2,3,4,4]" },
-        { input: "[], []", output: "[]" },
-    ],
-  },
+  // "climbing-stairs": {
+  //   id: "climbing-stairs",
+  //   title: "Climbing Stairs",
+  //   difficulty: "Easy",
+  //   category: "Dynamic Programming",
+  //   tags: ["dynamic-programming", "math"],
+  //   companyFrequency: [
+  //       { company: "Microsoft", frequency: "High" },
+  //       { company: "Amazon", frequency: "Medium" },
+  //       { company: "Google", frequency: "Low" },
+  //   ],
+  //   description: {
+  //     text: "Count distinct ways to climb to the top of n stairs.",
+  //   },
+  //   examples: [
+  //     { input: "2", output: "2" },
+  //       { input: "3", output: "3" },
+  //   ],
+  // },
+  // "merge-two-sorted-lists": {
+  //   id: "merge-two-sorted-lists",
+  //   title: "Merge Two Sorted Lists",
+  //   difficulty: "Easy",
+  //   category: "Linked List • Recursion",
+  //   tags: ["linked-list", "recursion", "merge"],
+  //   companyFrequency: [
+  //       { company: "Meta", frequency: "High" },
+  //       { company: "Amazon", frequency: "Medium" },
+  //       { company: "Microsoft", frequency: "Low" },
+  //   ],
+  //   description: {
+  //     text: "Merge two sorted linked lists and return it as a new sorted list.",
+  //   },
+  //   examples: [
+  //     { input: "[1,2,4], [1,3,4]", output: "[1,1,2,3,4,4]" },
+  //       { input: "[], []", output: "[]" },
+  //   ],
+  // },
   "best-time-to-buy-and-sell-stock": {
     id: "best-time-to-buy-and-sell-stock",
     title: "Best Time to Buy and Sell Stock",
@@ -498,11 +833,11 @@ export const LANGUAGE_CONFIG = {
   javascript: { name: "JavaScript", icon: "/javascript.png", monacoLang: "javascript" },
   python: { name: "Python", icon: "/python.png", monacoLang: "python" },
   java: { name: "Java", icon: "/java.png", monacoLang: "java" },
-  cpp: { name: "C++", icon: "/cpp.png", monacoLang: "cpp" },
-  c: { name: "C", icon: "/c.png", monacoLang: "c" },
-  swift: { name: "Swift", icon: "/swift.png", monacoLang: "swift" },
-  go: { name: "Go", icon: "/go.png", monacoLang: "go" },
-  typescript: { name: "TypeScript", icon: "/typescript.png", monacoLang: "typescript" },
+  // cpp: { name: "C++", icon: "/cpp.png", monacoLang: "cpp" },
+  // c: { name: "C", icon: "/c.png", monacoLang: "c" },
+  // swift: { name: "Swift", icon: "/swift.png", monacoLang: "swift" },
+  // go: { name: "Go", icon: "/go.png", monacoLang: "go" },
+  // typescript: { name: "TypeScript", icon: "/typescript.png", monacoLang: "typescript" },
 };
 export const DIFFICULTY_LEVELS = ["Easy", "Medium", "Hard"];
 export const CATEGORIES = [
