@@ -4,14 +4,6 @@ export const PROBLEMS = {
     title: "Two Sum",
     difficulty: "Easy",
     category: "Array • Hash Table",
-    tags: ["array", "hash-table", "brute-force", "optimization"],
-    companyFrequency: [
-      { company: "Amazon", frequency: "Very High" },
-      { company: "Google", frequency: "High" },
-      { company: "Microsoft", frequency: "Very High" },
-      { company: "Meta", frequency: "High" },
-      { company: "Accenture", frequency: "Very High" },
-    ],
     description: {
       text: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
       notes: [
@@ -202,7 +194,6 @@ export const PROBLEMS = {
     { input: "[1,2,3,null,null,4,5]", output: "[1,2,3,null,null,4,5]" },
   ],
 },
-
 
   "maximum-depth-of-binary-tree": {
     id: "maximum-depth-of-binary-tree",
