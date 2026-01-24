@@ -54,7 +54,7 @@ function SessionPage() {
     joinSessionMutation.mutate(id, { onSuccess: refetch });
 
     // remove the joinSessionMutation, refetch from dependencies to avoid infinite loop
-  }, [session, user, loadingSession, isHost, isParticipant, id]);
+  }, [session, user, loadingSession, isHost, isParticipant, id, joinSessionMutation, refetch]);
 
   // redirect the "participant" when session ends
   useEffect(() => {
@@ -62,13 +62,6 @@ function SessionPage() {
 
     if (session.status === "completed") navigate("/dashboard");
   }, [session, loadingSession, navigate]);
-
-  // update code when problem loads or changes
-  useEffect(() => {
-    if (problemData?.starterCode?.[selectedLanguage]) {
-      setCode(problemData.starterCode[selectedLanguage]);
-    }
-  }, [problemData, selectedLanguage]);
 
   const handleLanguageChange = (e) => {
     const newLang = e.target.value;
@@ -78,6 +71,11 @@ function SessionPage() {
     setCode(starterCode);
     setOutput(null);
   };
+
+  // update code when problem loads or language changes
+  if (problemData?.starterCode?.[selectedLanguage] && code !== problemData.starterCode[selectedLanguage]) {
+    setCode(problemData.starterCode[selectedLanguage]);
+  }
 
   const handleRunCode = async () => {
     setIsRunning(true);
